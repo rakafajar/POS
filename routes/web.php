@@ -15,6 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('kategori/data', 'KategoriController@listdata');
 Route::resource('kategori', 'KategoriController');

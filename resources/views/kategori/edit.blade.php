@@ -5,29 +5,29 @@
 	<li class="breadcrumb-item">
 		<a href="#">Kategori</a>
 	</li>
-	<li class="breadcrumb-item active">Create</li>
+	<li class="breadcrumb-item active">Edit</li>
 </ol>
 
 <!-- DataTables Example -->
 <div class="card mb-3">
 	<div class="card-header">
 		<i class="fas fa-table"></i>
-	Create Kategori</div>
+	Edit Kategori</div>
 	<div class="card-body">
-		<form action="{{ route('kategori.store') }}" method="POST">
-			{{ csrf_field() }}
+		<form action="{{ route('kategori.update', $kategori->id_kategori) }}" method="POST">
+			{{ csrf_field() }} {{ method_field('PATCH')}}
 			@if($errors->any())
-				<div class="alert alert-danger">
-					<ul>
-						@foreach($errors->all() as $error)
-						<li>{{ $error}}</li>
-						@endforeach
-					</ul>
-				</div>
+			<div class="alert alert-danger">
+				<ul>
+					@foreach($errors->all() as $error)
+					<li>{{ $error}}</li>
+					@endforeach
+				</ul>
+			</div>
 			@endif
 			<div class="form-group">
 				<div class="form-label-group">
-					<input type="text" id="nama_kategori" class="form-control" name="nama_kategori">
+					<input type="text" id="nama_kategori" class="form-control" name="nama_kategori" value="{{ $kategori->nama_kategori}}">
 					<label for="nama_kategori">Nama Kategori</label>
 				</div>
 			</div>

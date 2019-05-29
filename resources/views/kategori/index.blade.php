@@ -11,7 +11,7 @@
 
 <div class="box">
 	<div class="box-header">
-		<a class="btn btn-success" href="{{ route('kategori.index') }}">
+		<a class="btn btn-success" href="{{ route('kategori.create') }}">
 			<i class="fa fa-plus-circle"></i>
 			Tambah
 		</a>
@@ -49,8 +49,12 @@
 						<td>{{ $hasil->nama_kategori}}</td>
 						<td>
 							<div class="btn-group">
-								<a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit" style=""></i></a>
-								<a href="" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+								<a href="{!! route('kategori.edit', [$hasil->id_kategori]) !!}" class="btn btn-primary btn-sm"><i class="fa fa-edit" style=""></i></a>
+								<form method="post" action="{!! route('kategori.destroy', [$hasil->id_kategori]) !!}">
+                                    {!! csrf_field() !!}
+                                    {!! method_field('DELETE') !!}
+                                    <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Apakah Kamu Yakin Menghapus Data Kategori?')"><i class="fa fa-trash"></i></button>
+                             </form>
 							</div>
 						</td>
 					</tr>
@@ -61,7 +65,4 @@
 	</div>
 	<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
 </div>
-
-
-
 @endsection

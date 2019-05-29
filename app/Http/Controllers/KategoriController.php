@@ -6,6 +6,14 @@ use Auth;
 
 class KategoriController extends Controller
 {
+    // Pesan Masukan Data
+    protected $pesan = array(
+        'nama_kategori.required' => 'Isi Nama Kategori',
+    );
+
+    protected $aturan = array(
+        'nama_kategori' => 'required',
+    );
     /**
      * Display a listing of the resource.
      *
@@ -13,8 +21,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $hasil = KategoriModel::all();
-        return view('kategori.index',['kategori'=>$hasil]);
+        $kategori = KategoriModel::all();
+        return view('kategori.index')->with('kategori', $kategori);
     }
     /**
      * Show the form for creating a new resource.
@@ -23,7 +31,8 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('kategori.create');
+        $kategori = KategoriModel::all();
+        return view('kategori.create', compact('kategori'));
     }
     /**
      * Store a newly created resource in storage.
@@ -33,6 +42,7 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, $this->aturan, $this->pesan);
         $kategori = new KategoriModel;
         $kategori ->nama_kategori = $request['nama_kategori'];
         $kategori->save();
@@ -57,20 +67,24 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        $kategori = Kategori::find($id);
-        echo json_encode($kategori);
+        $kategori = KategoriModel::find($id);
+        return view('kategori.edit', compact('kategori', $kategori));
     }
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $requestx
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $kategori = Kategori::find($id);
-        $kategori->nama_kategori = $request['nama']; 
+        $this->validate($request, $this->aturan, $this->pesan);
+        $kategori = KategoriModel::find($id);
+        $kategori->nama_kategori = $request['nama_kategori']; 
+        $kategori->update();
+
+        return redirect('kategori');
     }
     /**
      * Remove the specified resource from storage.
@@ -80,7 +94,13 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        $kategori = Kategori::find($id);
+        $kategori = KategoriModel::find($id);
         $kategori->delete();
+        if ($kategori) {
+            return redirect(route('kategori.index'))->with('message', 'Successfully deleted');
+        }
+
+        return redirect(route('kategori.index'))->with('message', 'Failed to delete');
+
     }
 }
