@@ -123,9 +123,9 @@
       </div>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="charts.html">
-        <i class="fas fa-fw fa-chart-area"></i>
-        <span>Charts</span></a>
+      <a class="nav-link" href="{{ route('produk.index') }}">
+        <i class="fas fa-fw fa-folder"></i>
+        <span>Produk</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="tables.html">
@@ -137,7 +137,7 @@
       <div id="content-wrapper">
 
         <div class="container-fluid">
-          @yield('content');
+          @yield('content')
 
         </div>
         <!-- /.container-fluid -->

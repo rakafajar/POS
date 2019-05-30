@@ -32,14 +32,14 @@
 					<tr>
 						<th>ID</th>
 						<th>Nama Kategori</th>
-						<th>Action</th>
+						<th width="50">Action</th>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr>
 						<th>ID</th>
 						<th>Nama Kategori</th>
-						<th>Action</th>
+						<th width="50">Action</th>
 					</tr>
 				</tfoot>
 				<tbody>

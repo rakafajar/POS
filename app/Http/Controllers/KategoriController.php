@@ -96,11 +96,5 @@ class KategoriController extends Controller
     {
         $kategori = KategoriModel::find($id);
         $kategori->delete();
-        if ($kategori) {
-            return redirect(route('kategori.index'))->with('message', 'Successfully deleted');
-        }
-
-        return redirect(route('kategori.index'))->with('message', 'Failed to delete');
-
     }
 }

@@ -16,3 +16,9 @@ Route::get('/', function () {
 });
 
 Route::resource('kategori', 'KategoriController');
+
+Route::resource('produk', 'ProdukController');
+// Membuat Delete all Dengan Checkbox
+Route::delete('produkDeleteAll', 'ProdukController@deleteAll');
+// Membuat PDF
+Route::get('pdfproduk', 'ProdukController@makePDF'); 
