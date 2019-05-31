@@ -47,7 +47,7 @@ class KategoriController extends Controller
         $kategori ->nama_kategori = $request['nama_kategori'];
         $kategori->save();
 
-        return redirect('kategori');
+        return redirect(route('kategori.index'))->with('success','Data Berhasil Disimpan!');
     }
     /**
      * Display the specified resource.
@@ -84,7 +84,7 @@ class KategoriController extends Controller
         $kategori->nama_kategori = $request['nama_kategori']; 
         $kategori->update();
 
-        return redirect('kategori');
+         return redirect(route('kategori.index'))->with('success','Data Berhasil Diubah!');
     }
     /**
      * Remove the specified resource from storage.
@@ -96,5 +96,6 @@ class KategoriController extends Controller
     {
         $kategori = KategoriModel::find($id);
         $kategori->delete();
+        return back()->with('warning','Data Berhasil Dihapus!');
     }
 }

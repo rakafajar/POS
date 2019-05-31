@@ -54,7 +54,7 @@ class ProdukController extends Controller
             $produk->stok           = $request ['stok'];
             $produk->save();
 
-            return redirect('produk');
+            return redirect(route('produk.index'))->with('success','Data Berhasil Disimpan!');
         } else {
 
         }
@@ -104,7 +104,7 @@ class ProdukController extends Controller
             $produk->stok           = $request ['stok'];
             $produk->update();
 
-            return redirect('produk');
+            return redirect(route('produk.index'))->with('success','Data Berhasil Diubah!');
     }
 
     /**
@@ -117,6 +117,7 @@ class ProdukController extends Controller
     {
         $produk = ProdukModel::find($id);
         $produk->delete();
+        return back()->with('warning','Data Berhasil Dihapus!');
     }
 
     //Delete All dengan CheckBox
@@ -133,8 +134,8 @@ class ProdukController extends Controller
         $produk = ProdukModel::join('kategori','kategori.id_kategori', '=', 'produk.id_kategori')
                     ->orderBy('produk.id_produk', 'desc')->get();
         $no = 0;
-        $pdf = PDF::loadView('produk.pdf', compact('produk', 'no'));
+        $pdf = PDF::loadView('produk_pdf', compact('produk', 'no'));
         $pdf->setPaper('a4', 'potrait');
-        return $pdf->stream(); 
+        return $pdf->stream();
     }
 }

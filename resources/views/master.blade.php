@@ -20,6 +20,8 @@
   <!-- Custom styles for this template-->
   <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
 
+  <link rel="stylesheet" type="text/css" href="/pathto/css/sweetalert.css">
+
 </head>
 
 <body id="page-top">
@@ -137,6 +139,7 @@
       <div id="content-wrapper">
 
         <div class="container-fluid">
+          @include('flash-message')
           @yield('content')
 
         </div>

@@ -9,21 +9,21 @@
 </ol>
 
 
-<div class="box" style="margin-bottom: 10px; margin-top: -10px;">
+<div class="box">
 	<div class="box-header">
-			<a class="btn btn-success" href="{{ route('produk.create') }}">
-				<i class="fa fa-plus-circle"></i>
+		<a class="btn btn-success" href="{{ route('produk.create') }}">
+			<i class="fa fa-plus-circle"></i>
 			Tambah
-			</a>
-			<button class="btn btn-primary delete_all" data-url="{{ url('myproductsDeleteAll') }}">Delete All</button>
+		</a>
 	</div>
 </div>
+<br>
 
 <!-- DataTables Example -->
 <div class="card mb-3">
 	<div class="card-header">
 		<i class="fas fa-table"></i>
-	Data Produk
+		Data Produk
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
@@ -81,16 +81,3 @@
 	<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
 </div>
 @endsection
-
-@section('script')
-<script type="text/javascript">
-	$('#select-all').click(function(){
-		$('input[type="checkbox"]').prop('checked', this.checked);
-	});
-
-</script>
-@endsection
-
-
-
-
