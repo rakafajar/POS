@@ -11,6 +11,13 @@ class ProdukTableSeeder extends Seeder
      */
     public function run()
     {
+        $produk = App\ProdukModel::all();
+        foreach ($produk as $data) {
+            $update = App\ProdukModel::find($data->id_produk);
+            $update->kode_produk = rand(10000000, 99999999);
+            $update->update();
+        }
+        
          DB::table('produk')->insert(array(
         	[
 

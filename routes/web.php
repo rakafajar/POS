@@ -18,7 +18,12 @@ Route::get('/', function () {
 Route::resource('kategori', 'KategoriController');
 
 Route::resource('produk', 'ProdukController');
+// Print Laporan Produk
+Route::get('pdfproduk',  'ProdukController@makePDF');
+
+// Print Barcode
+Route::get('barcode', 'ProdukController@printBarcode');
+
 // Membuat Delete all Dengan Checkbox
 Route::delete('produkDeleteAll', 'ProdukController@deleteAll');
-// Membuat PDF
-Route::get('pdfproduk', 'ProdukController@makePDF'); 
+

@@ -15,6 +15,10 @@
 			<i class="fa fa-plus-circle"></i>
 			Tambah
 		</a>
+		<a onclick="printBarcode()" class="btn btn-info">
+			<i class="fa fa-barcode"></i>
+			Cetak Barcode
+		</a>
 	</div>
 </div>
 <br>
@@ -81,3 +85,17 @@
 	<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
 </div>
 @endsection
+
+@section('script')
+<script type="text/javascript">
+	function printBarcode(){
+		if ($('input:checked').length < 1) {
+			alert('Pilih data yang akan dicetak!');
+		}
+		else{
+			$('#form-produk').attr('target', '_blank').attr('action'."prduk/cetak").submit();
+		}
+	}
+</script>
+@endsection
+

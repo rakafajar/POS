@@ -128,13 +128,25 @@ class ProdukController extends Controller
         return response()->json(['success'=>"Produk Berhasil di Delete"]);
     }
 
-    // Controller Untuk Membuat PDF
+    // Controller Untuk Membuat Print Laporan
     public function makePDF()
-    {
-        $produk = ProdukModel::join('kategori','kategori.id_kategori', '=', 'produk.id_kategori')
+    { 
+        $produk = ProdukModel::leftJoin('kategori','kategori.id_kategori', '=', 'produk.id_kategori')
                     ->orderBy('produk.id_produk', 'desc')->get();
-        $no = 0;
-        $pdf = PDF::loadView('produk_pdf', compact('produk', 'no'));
+         
+        $no=  0; 
+        $pdf = PDF::loadView('produk.pdf', compact('produk', 'no'));
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream();
+    }
+
+    // Controller untuk print Barcode
+    public function printBarcode()
+    {
+        $produk = ProdukModel::limit(12)->get();
+        $no = 1;
+        $pdf = PDF::loadView('produk.barcode', compact('produk', 'no'));
+
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream();
     }
