@@ -121,32 +121,24 @@ class ProdukController extends Controller
     }
 
     //Delete All dengan CheckBox
-    public function deleteAll(Request $Request)
+    public function deletesemua(Request $request)
     {
-        $ids = $request->ids;
-        DB::table("produk")->whereIn('id_produk', explode(",",$ids))->delete();
-        return response()->json(['success'=>"Produk Berhasil di Delete"]);
-    }
-
-    // Controller Untuk Membuat Print Laporan
-    public function makePDF()
-    { 
-        $produk = ProdukModel::leftJoin('kategori','kategori.id_kategori', '=', 'produk.id_kategori')
-                    ->orderBy('produk.id_produk', 'desc')->get();
-         
-        $no=  0; 
-        $pdf = PDF::loadView('produk.pdf', compact('produk', 'no'));
-        $pdf->setPaper('a4', 'potrait');
-        return $pdf->stream();
+        foreach($request['id'] as $id){
+            $produk = ProdukModel::find($id);
+            $produk->delete();
+        }
     }
 
     // Controller untuk print Barcode
     public function printBarcode()
     {
-        $produk = ProdukModel::limit(12)->get();
+        $dataproduk = array();
+        foreach($request['id'] as $id){
+            $produk = ProdukModel::find($id);
+            $dataproduk[] = $produk;
+        }
         $no = 1;
-        $pdf = PDF::loadView('produk.barcode', compact('produk', 'no'));
-
+        $pdf = PDF::loadView('produk.barcode', compact('dataproduk', 'no'));
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream();
     }

@@ -10,20 +10,23 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware'=> ['web','cekuser:1']],
+function(){
+    // Untuk Controller Kategori
+    Route::resource('kategori', 'KategoriController');
+
+    // Untuk Controller Produk
+    Route::resource('produk', 'ProdukController');
+    // Print Barcode
+    Route::post('barcode', 'ProdukController@printBarcode');
+    // Membuat Delete all Dengan Checkbox Belum Bisa
+    Route::post('produk/deletesemua', 'ProdukController@deletesemua');
+});
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('kategori', 'KategoriController');
+Auth::routes();
 
-Route::resource('produk', 'ProdukController');
-// Print Laporan Produk
-Route::get('pdfproduk',  'ProdukController@makePDF');
-
-// Print Barcode
-Route::get('barcode', 'ProdukController@printBarcode');
-
-// Membuat Delete all Dengan Checkbox
-Route::delete('produkDeleteAll', 'ProdukController@deleteAll');
-
+Route::get('/home', 'HomeController@index')->name('home');
