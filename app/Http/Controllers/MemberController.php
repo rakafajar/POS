@@ -16,7 +16,7 @@ class MemberController extends Controller
     public function index()
     {
         $member = MemberModel::orderBy('id_member', 'desc')->get();
-        return view ('member.index');
+        return view ('member.index', compact('member'));
     }
 
     /**

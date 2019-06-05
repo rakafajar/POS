@@ -15,7 +15,7 @@ class SupplierTableSeeder extends Seeder
             [
                 'nama' => 'Raka Fajar',
                 'alamat' => 'Komplek Pasir Jati B.131',
-                'telpon' => '088222236128'
+                'telpon' => '0882222238'
             ]
         ));
 

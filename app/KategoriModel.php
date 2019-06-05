@@ -10,6 +10,6 @@ class KategoriModel extends Model
     protected $primaryKey = 'id_kategori';
 
     public function produk(){
-    	return $this->hasMany('App\ProdukModel');
+    	return $this->hasMany('App\ProdukModel', 'id_kategori');
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ config('app.locale') }}">
 
 <head>
 
@@ -8,9 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
   <title>SB Admin - Dashboard</title>
-
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Custom fonts for this template-->
   <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
 
@@ -28,7 +27,7 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">Start Bootstrap</a>
+    <a class="navbar-brand mr-1" href="index.html">Raka Mart</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -74,20 +73,20 @@
       </li>
       <li class="nav-item dropdown">
         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            {{ Auth::user()->name }} <span class="caret"></span>
+          {{ Auth::user()->name }} <span class="caret"></span>
         </a>
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('logout') }}"
-               onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-            </a>
+          <a class="dropdown-item" href="{{ route('logout') }}"
+          onclick="event.preventDefault();
+          document.getElementById('logout-form').submit();">
+          {{ __('Logout') }}
+        </a>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-        </div>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+        </form>
+      </div>
     </li>
   </ul>
 
@@ -97,99 +96,128 @@
 
   <!-- Sidebar -->
   <ul class="sidebar navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('kategori.index') }}">
-          <i class="fas fa-fw fa-tag"></i>
-          <span>Kategori</span></a>
+    <li class="nav-item active">
+      <a class="nav-link" href="{{ route('home')}}">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    @if(auth::user()->level == 1)
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('kategori.index') }}">
+        <i class="fas fa-fw fa-cube"></i>
+        <span>Kategori</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ route('produk.index') }}">
-          <i class="fas fa-fw fa-book"></i>
+          <i class="fas fa-fw fa-cubes"></i>
           <span>Produk</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('supplier.index') }}">
-          <i class="fas fa-fw fa-users"></i>
-          <span>Supplier</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('member.index') }}">
-          <i class="fas fa-fw fa-id-badge"></i>
-          <span>Member</span></a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Pages</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <h6 class="dropdown-header">Login Screens:</h6>
-          <a class="dropdown-item" href="login.html">Login</a>
-          <a class="dropdown-item" href="register.html">Register</a>
-          <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
-          <div class="dropdown-divider"></div>
-          <h6 class="dropdown-header">Other Pages:</h6>
-          <a class="dropdown-item" href="404.html">404 Page</a>
-          <a class="dropdown-item" href="blank.html">Blank Page</a>
-        </div>
-      </li>
-  </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('member.index') }}">
+            <i class="fas fa-fw fa-credit-card"></i>
+            <span>Member</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('supplier.index') }}">
+              <i class="fas fa-fw fa-truck"></i>
+              <span>Supplier</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fas fa-money-bill-wave-alt"></i>
+                <span>Pengeluaran</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <i class="fas fa-fw fa-user"></i>
+                  <span>User</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-upload"></i>
+                    <span>Penjualan</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">
+                      <i class="fas fa-fw fa-download"></i>
+                      <span>Pembelian</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">
+                        <i class="fas fa-fw fa-file-pdf"></i>
+                        <span>Laporan</span></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">
+                          <i class="fas fa-cogs"></i>
+                          <span>Setting</span></a>
+                        </li>
+                        @else
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">
+                            <i class="fas fa-fw fa-shopping-cart"></i>
+                            <span>Transaksi</span></a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">
+                              <i class="fas fa-fw fa-cart-plus"></i>
+                              <span>Transaksi Baru</span></a>
+                            </li>
+                            @endif
+                          </ul>
 
-      <div id="content-wrapper">
+                          <div id="content-wrapper">
 
-        <div class="container-fluid">
-          @include('flash-message')
-          @yield('content')
+                            <div class="container-fluid">
+                              @include('flash-message')
+                              @yield('content')
 
-        </div>
-        <!-- /.container-fluid -->
+                            </div>
+                            <!-- /.container-fluid -->
 
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright © Your Website 2019</span>
-            </div>
-          </div>
-        </footer>
+                            <!-- Sticky Footer -->
+                            <footer class="sticky-footer">
+                              <div class="container my-auto">
+                                <div class="copyright text-center my-auto">
+                                  <span>Copyright © Your Website 2019</span>
+                                </div>
+                              </div>
+                            </footer>
 
-      </div>
-      <!-- /.content-wrapper -->
+                          </div>
+                          <!-- /.content-wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
+                        </div>
+                        <!-- /#wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
+                        <!-- Scroll to Top Button-->
+                        <a class="scroll-to-top rounded" href="#page-top">
+                          <i class="fas fa-angle-up"></i>
+                        </a>
 
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+                        <!-- Bootstrap core JavaScript-->
+                        <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+                        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+                        <!-- Core plugin JavaScript-->
+                        <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
-    <!-- Page level plugin JavaScript-->
-    <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.js') }}"></script>
+                        <!-- Page level plugin JavaScript-->
+                        <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
+                        <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
+                        <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.js') }}"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="{{ asset('js/sb-admin.min.js') }}"></script>
+                        <!-- Custom scripts for all pages-->
+                        <script src="{{ asset('js/sb-admin.min.js') }}"></script>
 
-    <!-- Demo scripts for this page-->
-    <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
-    <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
+                        <!-- Demo scripts for this page-->
+                        <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+                        <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
 
-  </body>
+                        @yield('script')
 
-  </html>
+                      </body>
+
+                      </html>

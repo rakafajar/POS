@@ -17,19 +17,19 @@
 		<form action="{{ route('produk.update', $produk->id_produk) }}" method="POST">
 			{{ csrf_field() }} {{ method_field('PATCH')}}
 			@if($errors->any())
-				<div class="alert alert-danger">
-					<ul>
-						@foreach($errors->all() as $error)
-						<li>{{ $error}}</li>
-						@endforeach
-					</ul>
-				</div>
+			<div class="alert alert-danger">
+				<ul>
+					@foreach($errors->all() as $error)
+					<li>{{ $error}}</li>
+					@endforeach
+				</ul>
+			</div>
 			@endif
 			<input type="hidden" id="id" name="id">
 			<div class="form-group">
 				<div class="form-label-group">
-					<input type="text" id="kode_produk" class="form-control" name="kode_produk" autofocus required value="{{ $produk->kode_produk}}">
-					<label for="kode_produk">Kode Produk</label>
+					<input type="text" id="nama_produk" class="form-control" name="nama_produk" autofocus required value="{{ $produk->nama_produk}}">
+					<label for="nama_produk">Nama Produk</label>
 				</div>
 			</div>
 			<div class="form-group">
@@ -40,12 +40,6 @@
 						<option value="{{ $hasil->id_kategori }}">{{ $hasil->nama_kategori}}</option>
 						@endforeach
 					</select>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="form-label-group">
-					<input type="text" id="nama_produk" class="form-control" name="nama_produk" autofocus required value="{{ $produk->nama_produk}}">
-					<label for="nama_produk">Nama Produk</label>
 				</div>
 			</div>
 			<div class="form-group">

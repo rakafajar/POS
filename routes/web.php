@@ -18,9 +18,9 @@ function(){
     // Untuk Controller dan View Produk 
     Route::resource('produk', 'ProdukController');
     // Print Barcode
-    Route::post('barcode', 'ProdukController@printBarcode');
-    // Membuat Delete all Dengan Checkbox Belum Bisa
-    Route::post('produk/deletesemua', 'ProdukController@deletesemua');
+    Route::post('produk/cetak', 'ProdukController@printBarcode');
+    // Membuat Delete all Dengan Checkbox
+    Route::post('produk/hapus', 'ProdukController@deleteSelected');
 
     // Untuk Controller dan View Supplier
     Route::resource('supplier', 'SupplierController');
