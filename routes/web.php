@@ -12,19 +12,26 @@
 */
 Route::group(['middleware'=> ['web','cekuser:1']],
 function(){
-    // Untuk Controller Kategori
+    // Untuk Controller dan View Kategori
     Route::resource('kategori', 'KategoriController');
 
-    // Untuk Controller Produk
+    // Untuk Controller dan View Produk 
     Route::resource('produk', 'ProdukController');
     // Print Barcode
     Route::post('barcode', 'ProdukController@printBarcode');
     // Membuat Delete all Dengan Checkbox Belum Bisa
     Route::post('produk/deletesemua', 'ProdukController@deletesemua');
+
+    // Untuk Controller dan View Supplier
+    Route::resource('supplier', 'SupplierController');
+
+    // Untuk Controller dan View Member
+    Route::resource('member', 'MemberController');
+    Route::post('member/cetak', 'MemberController@printCard');
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Auth::routes();
