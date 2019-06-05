@@ -18,7 +18,7 @@ class BuatTabelMember extends Migration
             $table->bigInteger('kode_member')->unsigned();
             $table->string('nama', 100);
             $table->text('alamat');
-            $table->string('telepon', 20);
+            $table->string('telpon', 20);
             $table->timestamps();
         });
     }
