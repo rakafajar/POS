@@ -124,7 +124,7 @@
               <span>Supplier</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{ route('pengeluaran.index') }}">
                 <i class="fas fa-money-bill-wave-alt"></i>
                 <span>Pengeluaran</span></a>
               </li>

@@ -131,8 +131,9 @@ class ProdukController extends Controller
     // Controller untuk print Barcode
     public function printBarcode(Request $request)
     {
+        // dd($request->id);
         $dataproduk = array();
-        foreach($request as $id) {
+        foreach($request['id'] as $id) {
             $produk = ProdukModel::find($id);
             $dataproduk[] = $produk;
         }

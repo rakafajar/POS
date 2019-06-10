@@ -104,6 +104,7 @@ class MemberController extends Controller
     {
         $member = MemberModel::find($id);
         $member->delete();
+        return back()->with('warning','Data Berhasil Dihapus!');
     }
 
     public function printCard(Request $request)
