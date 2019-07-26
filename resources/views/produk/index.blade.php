@@ -42,7 +42,6 @@
 						<tr>
 							<th width="20"><input type="checkbox" value="1" id="select-all"></th>
 							<th width="20">No</th>
-							<th>ID Produk</th>
 							<th>Kode Produk</th>
 							<th>Nama Produk</th>
 							<th>Kategori</th>
@@ -61,7 +60,6 @@
 						<tr>
 							<td><input type="checkbox" name="id[]" value="{{ $hasil->id_produk }}"></td>
 							<td>{{ $no }}</td>
-							<td>{{ $hasil->id_produk }}</td>
 							<td>{{ $hasil->kode_produk }}</td>
 							<td>{{ $hasil->nama_produk }}</td>
 							<td>{{ $hasil->nama_kategori}}</td>
@@ -108,7 +106,7 @@
 				type: "POST",
 				data: $('#form-produk').serialize(),
 				success: function(data){
-					table.ajax.reload();
+					location.reload();
 				},
 
 			});

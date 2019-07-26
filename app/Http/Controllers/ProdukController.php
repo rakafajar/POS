@@ -17,8 +17,8 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        $produk = ProdukModel::leftJoin('kategori','kategori.id_kategori', '=', 'produk.id_kategori')
-                    ->orderBy('produk.id_produk', 'desc')->get();
+        $produk = ProdukModel::leftJoin('kategori', 'kategori.id_kategori', '=', 'produk.id_kategori')
+            ->orderBy('produk.id_produk', 'desc')->get();
         return view('produk.index', compact('produk'));
     }
 
@@ -30,7 +30,7 @@ class ProdukController extends Controller
     public function create()
     {
         $kategori = KategoriModel::all();
-        return view('produk.create', compact( 'kategori'));
+        return view('produk.create', compact('kategori'));
     }
 
     /**
@@ -44,20 +44,18 @@ class ProdukController extends Controller
         $jml = ProdukModel::where('kode_produk', '=', $request['kode'])->count();
         if ($jml < 1) {
             $produk = new ProdukModel;
-            $produk->kode_produk    = $request ['kode'];
-            $produk->nama_produk    = $request ['nama'];
-            $produk->id_kategori    = $request ['kategori'];
-            $produk->merk           = $request ['merk'];
-            $produk->harga_beli     = $request ['harga_beli'];
-            $produk->diskon         = $request ['diskon'];
-            $produk->harga_jual     = $request ['harga_jual'];
-            $produk->stok           = $request ['stok'];
+            $produk->kode_produk    = $request['kode'];
+            $produk->nama_produk    = $request['nama'];
+            $produk->id_kategori    = $request['kategori'];
+            $produk->merk           = $request['merk'];
+            $produk->harga_beli     = $request['harga_beli'];
+            $produk->diskon         = $request['diskon'];
+            $produk->harga_jual     = $request['harga_jual'];
+            $produk->stok           = $request['stok'];
             $produk->save();
 
-            return redirect(route('produk.index'))->with('success','Data Berhasil Disimpan!');
-        } else {
-
-        }
+            return redirect(route('produk.index'))->with('success', 'Data Berhasil Disimpan!');
+        } else { }
     }
 
     /**
@@ -80,7 +78,7 @@ class ProdukController extends Controller
     public function edit($id)
     {
         $produk = ProdukModel::find($id);
-        $kategori= KategoriModel::all();
+        $kategori = KategoriModel::all();
         return view('produk.edit', compact('produk', 'kategori'));
     }
 
@@ -94,16 +92,16 @@ class ProdukController extends Controller
     public function update(Request $request, $id)
     {
         $produk = ProdukModel::find($id);
-            $produk->nama_produk    = $request ['nama_produk'];
-            $produk->id_kategori    = $request ['kategori'];
-            $produk->merk           = $request ['merk'];
-            $produk->harga_beli     = $request ['harga_beli'];
-            $produk->diskon         = $request ['diskon'];
-            $produk->harga_jual     = $request ['harga_jual'];
-            $produk->stok           = $request ['stok'];
-            $produk->update();
+        $produk->nama_produk    = $request['nama_produk'];
+        $produk->id_kategori    = $request['kategori'];
+        $produk->merk           = $request['merk'];
+        $produk->harga_beli     = $request['harga_beli'];
+        $produk->diskon         = $request['diskon'];
+        $produk->harga_jual     = $request['harga_jual'];
+        $produk->stok           = $request['stok'];
+        $produk->update();
 
-            return redirect(route('produk.index'))->with('success','Data Berhasil Diubah!');
+        return redirect(route('produk.index'))->with('success', 'Data Berhasil Diubah!');
     }
 
     /**
@@ -116,16 +114,17 @@ class ProdukController extends Controller
     {
         $produk = ProdukModel::where('id', $id);
         $produk->delete();
-        return back()->with('warning','Data Berhasil Dihapus!');
+        return back()->with('warning', 'Data Berhasil Dihapus!');
     }
 
     //Delete All dengan CheckBox
     public function deleteSelected(Request $request)
     {
-        foreach($request['id'] as $id){
+        foreach ($request['id'] as $id) {
             $produk = ProdukModel::find($id);
             $produk->delete();
         }
+        return back()->with('warning', 'Data Berhasil Dihapus!');
     }
 
     // Controller untuk print Barcode
@@ -133,7 +132,7 @@ class ProdukController extends Controller
     {
         // dd($request->id);
         $dataproduk = array();
-        foreach($request['id'] as $id) {
+        foreach ($request['id'] as $id) {
             $produk = ProdukModel::find($id);
             $dataproduk[] = $produk;
         }

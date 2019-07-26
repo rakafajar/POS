@@ -16,8 +16,8 @@
 			Tambah
 		</a>
 		<a onclick="printCard()" class="btn btn-info">
-			<i class="fa fa-credit-card"></i>
-			Cetak Kartu
+				<i class="fa fa-print"></i>
+				Kartu Member
 		</a>
 	</div>
 </div>
@@ -31,8 +31,8 @@
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
+		<form method="post" id="form-member">
 			{{ csrf_field() }}
-			<form method="post" id="form-member">
 			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 				<thead>
 					<tr>
@@ -41,27 +41,26 @@
 						<th>Nama Member</th>
 						<th>Alamat</th>
 						<th>Nomor Telpon</th>
-						<th width="50">Action</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach($member as $hasil)
 					<tr>
-						<td></td>
+						<td><input type="checkbox" name="id[]" value="{{ $hasil->id_member }}"></td>
 						<td>{{ $hasil->kode_member}}</td>
 						<td>{{ $hasil->nama}}</td>
 						<td>{{ $hasil->alamat }}</td>
 						<td>{{ $hasil->telpon }}</td>
-						<td>
-							<div class="btn-group">
+						<th>
 								<a href="{!! route('member.edit', [$hasil->id_member]) !!}" class="btn btn-primary btn-sm"><i class="fa fa-edit" style=""></i></a>
-								<form method="post" action="{!! route('supplier.destroy', [$hasil->id_member]) !!}">
+								{{-- <form method="post" action="{!! route('member.destroy', [$hasil->id_member]) !!}">
                                     {!! csrf_field() !!}
                                     {!! method_field('DELETE') !!}
                                     <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Apakah Kamu Yakin Menghapus Data Member?')"><i class="fa fa-trash"></i></button>
-                             </form>
-							</div>
-						</td>
+							 </form> --}}
+							 <a href="{{ URL::to('member/destroy/'.$hasil->id_member) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+						</th>
 					</tr>
 					@endforeach
 				</tbody>
@@ -71,4 +70,38 @@
 	</div>
 	<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
 </div>
+@endsection
+@section('script')
+<!-- Script Untuk Ceklis Semua -->
+<script type="text/javascript">
+	$('#select-all').click(function(){
+		$('input[type="checkbox"]').prop('checked', this.checked);
+	});
+
+	// //Menghapus Semua Data yang dicentang
+	// function deleteAll(){
+	// 	if ($('input:checked').length<1) {
+	// 		alert('Pilih data yang akan di hapus!')
+	// 	} else if (confirm("Apakah yakin akan menghapus semua data terpilih?")){
+	// 		$.ajax({
+	// 			url: "member/hapus",
+	// 			type: "POST",
+	// 			data: $('#form-member').serialize(),
+	// 			success: function(data){
+	// 				location.reload();
+	// 			},
+
+	// 		});
+	// 	}
+	// }
+
+	// Script Untuk Cetak Barcode
+	function printCard(){
+		if ($('input:checked').length<1) {
+			alert('Pilih data yang akan di cetak!')
+		} else{
+			$('#form-member').attr('target', '_blank').attr('action', "member/cetak").submit();
+		}
+	}
+</script>
 @endsection

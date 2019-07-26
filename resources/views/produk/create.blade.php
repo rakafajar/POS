@@ -25,16 +25,15 @@
 					</ul>
 				</div>
 			@endif
-			<input type="hidden" id="id" name="id">
 			<div class="form-group">
 				<div class="form-label-group">
-					<input type="text" id="kode_produk" class="form-control" name="kode_produk" autofocus required>
+					<input type="text" id="kode" class="form-control" name="kode" autofocus required>
 					<label for="kode_produk">Kode Produk</label>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="form-label-group">
-					<select type="text" id="id_kategori" class="form-control" required name="id_kategori">
+					<select type="text" id="kategori" class="form-control" required name="kategori">
 						<option value="">-- Pilih Kategori --</option>
 						@foreach($kategori as $hasil)
 						<option value="{{ $hasil->id_kategori }}">{{ $hasil->nama_kategori}}</option>
@@ -44,7 +43,7 @@
 			</div>
 			<div class="form-group">
 				<div class="form-label-group">
-					<input type="text" id="nama_produk" class="form-control" name="nama_produk" autofocus required>
+					<input type="text" id="nama" class="form-control" name="nama" autofocus required>
 					<label for="nama_produk">Nama Produk</label>
 				</div>
 			</div>

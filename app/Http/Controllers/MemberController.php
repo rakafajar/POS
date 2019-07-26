@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PDF;
+use DB;
 use App\MemberModel;
 
 class MemberController extends Controller
@@ -16,7 +17,7 @@ class MemberController extends Controller
     public function index()
     {
         $member = MemberModel::orderBy('id_member', 'desc')->get();
-        return view ('member.index', compact('member'));
+        return view('member.index', compact('member'));
     }
 
     /**
@@ -40,17 +41,14 @@ class MemberController extends Controller
         $jml = MemberModel::where('kode_member', '=', $request['kode'])->count();
         if ($jml < 1) {
             $produk = new MemberModel;
-            $produk->kode_member    = $request ['kode'];
-            $produk->nama           = $request ['nama'];
-            $produk->alamat         = $request ['alamat'];
-            $produk->telpon         = $request ['telpon'];
+            $produk->kode_member    = $request['kode'];
+            $produk->nama           = $request['nama'];
+            $produk->alamat         = $request['alamat'];
+            $produk->telpon         = $request['telpon'];
             $produk->save();
 
-            return redirect(route('member.index'))->with('success','Data Berhasil Disimpan!');
-        } else {
-
-        }
-        
+            return redirect(route('member.index'))->with('success', 'Data Berhasil Disimpan!');
+        } else { }
     }
 
     /**
@@ -86,12 +84,12 @@ class MemberController extends Controller
     public function update(Request $request, $id)
     {
         $produk = MemberModel::find($id);
-        $produk->nama           = $request ['nama'];
-        $produk->alamat         = $request ['alamat'];
-        $produk->telpon         = $request ['telpon'];
+        $produk->nama           = $request['nama'];
+        $produk->alamat         = $request['alamat'];
+        $produk->telpon         = $request['telpon'];
         $produk->save();
 
-        return redirect(route('member.index'))->with('success','Data Berhasil Disimpan!');
+        return redirect(route('member.index'))->with('success', 'Data Berhasil Disimpan!');
     }
 
     /**
@@ -102,15 +100,14 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        $member = MemberModel::find($id);
-        $member->delete();
-        return back()->with('warning','Data Berhasil Dihapus!');
+        DB::table('member')->where('id_member', '=', $id)->delete();
+        return back()->with('warning', 'Data Berhasil Dihapus!');
     }
 
     public function printCard(Request $request)
     {
         $datamember = array();
-        foreach($request['id'] as $id){
+        foreach ($request['id'] as $id) {
             $member = MemberModel::find($id);
             $datamember[] = $member;
         }
